@@ -1,0 +1,42 @@
+{
+    "name": "RHS Adaptive Beamforming NAS",
+
+    "build": {
+        "dockerfile": "Dockerfile",
+        "context": ".."
+    },
+
+    "workspaceFolder": "/workspace",
+
+    "runArgs": [
+        "--gpus=all"
+    ],
+
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-python.vscode-pylance",
+                "ms-python.debugpy",
+                "ms-azuretools.vscode-docker",
+                "eamodio.gitlens"
+            ],
+
+            "settings": {
+                "python.testing.pytestEnabled": true,
+                "python.testing.unittestEnabled": false,
+                "python.testing.pytestArgs": [
+                    "tests"
+                ],
+
+                "python.analysis.extraPaths": [
+                    "/workspace/src"
+                ]
+            }
+        }
+    },
+
+    "postCreateCommand": "bash .devcontainer/post-create.sh",
+
+    "remoteUser": "vscode"
+}

@@ -1,0 +1,58 @@
+install:
+	pip install -e .
+
+dev:
+	pip install -e ".[dev]"
+
+test:
+	pytest -v
+
+test-unit:
+	pytest tests/unit -v
+
+test-model:
+	pytest tests/model -v
+
+test-nas:
+	pytest tests/nas -v
+
+test-integration:
+	pytest tests/integration -v
+
+lint:
+	ruff check src tests scripts
+
+format:
+	ruff format src tests scripts
+
+validate-gp:
+	python scripts/validate_gp.py
+
+generate-debug:
+	python scripts/generate_dataset.py \
+		--config configs/dataset/debug_20.yaml
+
+train:
+	python scripts/train.py
+
+nas-smoke:
+	python scripts/search_nas.py \
+		--config configs/nas/random.yaml \
+		--max-trials 2 \
+		--epochs 1
+
+nas:
+	python scripts/search_nas.py \
+		--config configs/nas/darts.yaml
+
+export:
+	python scripts/export_architecture.py
+
+retrain:
+	python scripts/retrain_architecture.py
+
+evaluate:
+	python scripts/evaluate.py
+
+benchmark:
+	python scripts/benchmark.py

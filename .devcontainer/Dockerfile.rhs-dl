@@ -1,0 +1,25 @@
+FROM pytorch/pytorch:2.4.1-cuda12.4-cudnn9-devel
+
+ARG USERNAME=vscode
+ARG USER_UID=1000
+ARG USER_GID=1000
+
+RUN groupadd --gid ${USER_GID} ${USERNAME} \
+    && useradd --uid ${USER_UID} \
+       --gid ${USER_GID} \
+       -m ${USERNAME} \
+    && apt-get update \
+    && apt-get install -y \
+       git \
+       curl \
+       wget \
+       build-essential \
+       graphviz \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /workspace
+
+USER ${USERNAME}
+
+ENV PYTHONUNBUFFERED=1
+ENV PYTHONPATH=/workspace/src

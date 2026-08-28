@@ -1,2 +1,63 @@
 *.zip
 *.tar
+data/raw/*
+data/processed/*
+checkpoints/*
+experiments/runs/*
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE
+.vscode/
+.idea/
+
+# Data
+data/raw/*
+data/processed/*
+data/splits/*
+
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/splits/.gitkeep
+
+# Models
+checkpoints/*
+*.pt
+*.pth
+*.onnx
+
+!checkpoints/.gitkeep
+
+# Experiments
+experiments/runs/*
+experiments/results/*
+
+# TensorBoard
+runs/
+*.tfevents.*
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+
+# Temporary
+tmp/
+temp/
+.github/

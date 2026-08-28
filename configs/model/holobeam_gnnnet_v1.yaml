@@ -1,0 +1,52 @@
+model:
+  name: "HoloBeamGEN"
+
+  input:
+    complex_channels: true
+    use_H_BS: true
+    use_H_RHS: true
+    use_H_testD: true
+    use_E: true
+    use_configuration: true
+
+  embedding:
+    hidden_dim: 256
+    config_dim: 128
+    element_dim: 128
+
+  efficient:
+    enabled: true
+    expansion_ratio: 4
+    kernel_size: 3
+    se_ratio: 0.25
+
+  gnn:
+    layers: 6
+    hidden_dim: 256
+    message_dim: 256
+    aggregation: "mean"
+
+  attention:
+    enabled: true
+    heads: 8
+    dropout: 0.05
+
+  heads:
+    M:
+      enabled: true
+      output_mode: "amplitude_phase"
+
+    w:
+      enabled: true
+      output_mode: "complex"
+
+    rate:
+      enabled: true
+
+  physics:
+    normalize_w: true
+    phase_projection: "tanh"
+    enforce_power_constraint: true
+
+  parameters:
+    expected_max: 15000000
