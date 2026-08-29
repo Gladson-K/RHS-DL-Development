@@ -588,3 +588,30 @@ make test
                        ▼
                   Deployment
 ```
+
+* Split for RHS-HoloBeam
+
+```
+RHS-HoloBeam-NAS
+│
+├── RHS-HoloBeam-Base
+│       fixed manually designed architecture
+│
+├── RHS-HoloBeam-NAS
+│       searched architecture
+│
+└── RHS-HoloBeam-NAS-Lite
+        latency/edge optimized architecture
+```
+
+Three useful setup
+
+```
+| Model             | Purpose                   |
+| ----------------- | ------------------------- |
+| GP                | Classical reference       |
+| HoloBeam-Base     | Hand-designed DL baseline |
+| HoloBeam-NAS      | NAS optimized model       |
+| HoloBeam-NAS-Lite | Low-latency deployment    |
+```
+```

@@ -1,3 +1,6 @@
+from torch import nn
+
+
 class RHSOperatorChoice(nn.Module):
 
     def __init__(self, dim):
@@ -8,3 +11,4 @@ class RHSOperatorChoice(nn.Module):
             GraphAttentionBlock(dim),
             EfficientRHSBlock(dim),
         ])
+
