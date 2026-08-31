@@ -60,4 +60,5 @@ logs/
 # Temporary
 tmp/
 temp/
-.github/
+.github/workflows/*.yml
+.devcontainer/
