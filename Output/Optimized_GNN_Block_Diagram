@@ -1,0 +1,39 @@
+// Optimized GNN Architecture
+digraph {
+	rankdir=TB
+	Input [label="Input Features (x, edge_index, batch)"]
+	Conv1 [label="GATConv(num_node_features -> hidden_dim * 4)"]
+	Norm1 [label="GraphNorm(hidden_dim * 4)"]
+	Act1 [label="ELU Activation"]
+	Drop1 [label="Dropout(0.1)"]
+	Input -> Conv1
+	Conv1 -> Norm1
+	Norm1 -> Act1
+	Act1 -> Drop1
+	Conv2 [label="GATConv(hidden_dim * 4 -> hidden_dim * 2)"]
+	Norm2 [label="GraphNorm(hidden_dim * 2)"]
+	Act2 [label="ELU Activation"]
+	Drop2 [label="Dropout(0.1)"]
+	Drop1 -> Conv2
+	Conv2 -> Norm2
+	Norm2 -> Act2
+	Act2 -> Drop2
+	Conv3 [label="GATConv(hidden_dim * 2 -> hidden_dim)"]
+	Act3 [label="ELU Activation"]
+	Drop2 -> Conv3
+	Conv3 -> Act3
+	Pool [label="Global Mean Pooling"]
+	Act3 -> Pool
+	Lin1 [label="Linear(hidden_dim -> hidden_dim // 2)"]
+	Norm3 [label="LayerNorm(hidden_dim // 2)"]
+	Relu [label="ReLU Activation"]
+	Drop3 [label="Dropout(0.2)"]
+	Lin2 [label="Linear(hidden_dim // 2 -> output_dim)"]
+	Pool -> Lin1
+	Lin1 -> Norm3
+	Norm3 -> Relu
+	Relu -> Drop3
+	Drop3 -> Lin2
+	Output [label="Output Predictions"]
+	Lin2 -> Output
+}
