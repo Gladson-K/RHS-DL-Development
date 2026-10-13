@@ -1,0 +1,62 @@
+{
+  "architecture": {
+    "hidden_layers": [
+      640,
+      320,
+      160,
+      80
+    ],
+    "activation": "gelu",
+    "dropout": 0.0,
+    "batchnorm": true,
+    "residual": false,
+    "head": "residual",
+    "input_dim": 10,
+    "output_dim": 25601
+  },
+  "metrics": {
+    "M_real": {
+      "mse": 0.03626621284257347,
+      "mae": 0.12047592739461667
+    },
+    "M_imag": {
+      "mse": 0.036411829620422,
+      "mae": 0.12095044600560698
+    },
+    "M": {
+      "mse": 0.03633902123149773,
+      "n_mse": 0.42965613093413724,
+      "r2": 0.570297205181076,
+      "cos": 0.7605398717285179
+    },
+    "rate": {
+      "mse": 32.02822469479995,
+      "mae": 4.324735910707629,
+      "r2": 0.7775358466454398
+    },
+    "n_samples": 503,
+    "parameters": 2359121,
+    "latency_ms": 0.6908548999490449,
+    "epochs_run": 12,
+    "arch": {
+      "hidden_layers": [
+        640,
+        320,
+        160,
+        80
+      ],
+      "activation": "gelu",
+      "dropout": 0.0,
+      "batchnorm": true,
+      "residual": false,
+      "head": "residual",
+      "input_dim": 10,
+      "output_dim": 25601
+    },
+    "arch_name": "h640x320x160x80-gelu-d0.0-bn-residual",
+    "score": 1.0285316168465828,
+    "train_seconds": 90.92109322547913,
+    "tag": "final"
+  },
+  "name": "h640x320x160x80-gelu-d0.0-bn-residual"
+}

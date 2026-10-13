@@ -56,3 +56,42 @@ evaluate:
 
 benchmark:
 	python scripts/benchmark.py
+
+# --- real 64x64 MIMO dataset pipeline (NAS) -------------------------------
+
+real-extract:
+	python scripts/extract_mimo64_dataset.py --validate
+
+real-validate:
+	python scripts/validate_mimo64_dataset.py --h5 data/raw/64x64_MIMO_beamforming_dataset.h5
+
+real-prepare:
+	python scripts/prepare_mimo64_dataset.py \
+		--h5 data/raw/64x64_MIMO_beamforming_dataset.h5 \
+		--samples 5000 \
+		--out data/processed/mimo64_5000.npz
+
+real-evd:
+	python scripts/evd_baseline.py \
+		--h5 data/raw/64x64_MIMO_beamforming_dataset.h5 \
+		--cache data/processed/mimo64_5000.npz \
+		--samples 1000
+
+real-nas:
+	python scripts/search_nas_real.py \
+		--cache data/processed/mimo64_5000.npz \
+		--strategy random \
+		--num-candidates 12 \
+		--budget-epochs 4 \
+		--final-epochs 15 \
+		--top-k 3 \
+		--output search_results/mimo64_nas
+
+real-train-best:
+	python scripts/train_best_real.py \
+		--cache data/processed/mimo64_5000.npz \
+		--best search_results/mimo64_nas/architectures/best.json \
+		--epochs 40 \
+		--out checkpoints/mimo64_nas_best.pt
+
+real-all: real-prepare real-nas real-evd real-train-best
