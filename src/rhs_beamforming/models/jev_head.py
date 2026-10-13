@@ -46,7 +46,9 @@ class JEVDecisionHead(nn.Module):
         k = min(self.num_eig, h.shape[1])
         evals_top = evals[..., -k:]                       # [B,k]
         vecs_top = evecs[..., -k:]                         # [B,T,k]
-        self.last_eigenvalues = evals_top.detach()
+        # kept (non-detached) so a spectral-consistency regulariser can penalise
+        # the eigen-decision directly via autograd through torch.linalg.eigh
+        self.last_eigenvalues = evals_top
 
         coeff = vecs_top.transpose(1, 2) @ h              # [B,k,D]
         weights = torch.softmax(evals_top, dim=-1)        # [B,k]
