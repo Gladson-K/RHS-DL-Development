@@ -1,0 +1,2 @@
+/usr/bin/ar qc librhs_gp_beamformer.a "CMakeFiles/rhs_gp_beamformer.dir/mnt/d/Workspace_Glad/Projects/RHS-DL-Development/rhs_product/cpp/src/rhs_gp_beamformer.cpp.o"
+/usr/bin/ranlib librhs_gp_beamformer.a
