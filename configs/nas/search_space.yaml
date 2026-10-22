@@ -1,0 +1,99 @@
+nas:
+  name: "RHSAdaptiveBeamformingSearchSpace"
+
+  input:
+    complex_representation: "real_imag"
+    configuration_conditioning: true
+
+  stem:
+    hidden_dim:
+      choices: [128, 192, 256, 384]
+
+    projection:
+      choices:
+        - linear
+        - bottleneck
+        - complex_linear
+
+  spatial_blocks:
+
+    count:
+      choices: [2, 4, 6, 8]
+
+    operator:
+      choices:
+        - residual
+        - mbconv
+        - gnn
+        - graph_attention
+        - spatial_attention
+
+    aggregation:
+      choices:
+        - mean
+        - sum
+        - attention
+        - gated
+
+  attention:
+
+    enabled:
+      choices: [true, false]
+
+    heads:
+      choices: [2, 4, 8]
+
+    type:
+      choices:
+        - self
+        - cross_user
+        - cross_rhs
+
+  configuration:
+
+    conditioning:
+      choices:
+        - add
+        - concat
+        - film
+        - cross_attention
+
+  rhs_cell:
+
+    depth:
+      choices: [2, 3, 4]
+
+    operators:
+      choices:
+        - complex_linear
+        - complex_residual
+        - gnn
+        - attention
+
+  beamformer_head:
+
+    M:
+      representation:
+        choices:
+          - real_imag
+          - amplitude_phase
+
+    w:
+      representation:
+        choices:
+          - real_imag
+          - amplitude_phase
+
+  projection:
+
+    normalize_w:
+      choices: [true]
+
+    phase_constraint:
+      choices:
+        - continuous
+        - quantized
+
+  model_limits:
+    max_parameters: 15000000
+    max_latency_ms: 10

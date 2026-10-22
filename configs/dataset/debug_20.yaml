@@ -1,0 +1,4 @@
+dataset:
+  name: debug_20
+  samples: 20
+  seed: 42

@@ -1,0 +1,18 @@
+nas:
+  strategy: random
+  max_trials: 20
+  epochs: 1
+  search_samples: 500
+
+search_space:
+  hidden_dim: [128, 256]
+  depth: [2, 3, 4]
+  operator:
+    - bottleneck
+    - complex_residual
+
+objective:
+  primary: normalized_rate
+  secondary:
+    - latency_ms
+    - parameters

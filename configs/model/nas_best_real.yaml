@@ -1,0 +1,40 @@
+# Best NAS architecture found by scripts/search_nas_real.py
+# Search: search_results/mimo64_nas (random search, 12 candidates, successive
+# halving, config configs/nas/real_multisearch.yaml).
+# Dataset: real_64x64_mimo, 5000 samples, CPU (8 threads).
+model:
+  name: nas_best_real
+  family: nas
+  type: tabular_mlp
+
+architecture:
+  hidden_layers: [256, 256, 128, 64]
+  activation: leaky_relu
+  dropout: 0.1
+  batchnorm: false
+  residual: true
+  head: deep
+  input_dim: 10
+  output_dim: 25601
+
+metrics:
+  split: test  # 503 held-out samples
+  # validation score used for selection (search_results/mimo64_nas/best.json)
+  score: 1.055885540253829
+  # held-out test metrics (scripts/train_best_real.py)
+  rate_r2: 0.8000935754674731
+  rate_mse: 29.831919857806287
+  rate_mae: 3.9353506342317193
+  M_n_mse: 0.44521630349682034
+  M_r2: 0.5547367552711129
+  beamforming_similarity: 0.7509900210257823
+  M_real_mse: 0.0371265570638668
+  M_imag_mse: 0.037221224047317654
+  latency_ms: 0.52
+  parameters: 997825
+
+# Runner-up (higher accuracy, ~2.3x larger):
+#   hidden_layers: [512, 512, 256, 128], silu, d0.2, residual, deep
+#   test: rate_r2 0.806, M_cos 0.769, M_n_mse 0.413, 2.27M params, 0.42 ms
+
+checkpoint: checkpoints/mimo64_nas_best.pt

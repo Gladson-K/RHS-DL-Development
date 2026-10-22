@@ -1,0 +1,121 @@
+{
+  "checkpoint": "checkpoints/mimo64_nas_best_run3.pt",
+  "architecture": {
+    "hidden_layers": [
+      256,
+      256,
+      128,
+      64
+    ],
+    "activation": "leaky_relu",
+    "dropout": 0.1,
+    "batchnorm": false,
+    "residual": true,
+    "head": "deep",
+    "input_dim": 10,
+    "output_dim": 25601
+  },
+  "architecture_name": "h256x256x128x64-leaky_relu-d0.1-nobn-deep",
+  "test": {
+    "M_real": {
+      "mse": 0.03771115373190544,
+      "mae": 0.126327894449708
+    },
+    "M_imag": {
+      "mse": 0.037803068976279046,
+      "mae": 0.12674574501234778
+    },
+    "M": {
+      "mse": 0.037757111354092245,
+      "n_mse": 0.45220129764593503,
+      "r2": 0.5477510246614761,
+      "cos": 0.7441286108666457
+    },
+    "rate": {
+      "mse": 30.771420063602758,
+      "mae": 4.015084177551876,
+      "r2": 0.7937978986259037
+    },
+    "n_samples": 503,
+    "parameters": 997825
+  },
+  "val": {
+    "M_real": {
+      "mse": 0.03841948583159248,
+      "mae": 0.12720087313035847
+    },
+    "M_imag": {
+      "mse": 0.03857991455563494,
+      "mae": 0.12768432495845242
+    },
+    "M": {
+      "mse": 0.038499700193613706,
+      "n_mse": 0.4552030107236703,
+      "r2": 0.5447475410111745,
+      "cos": 0.7431118572934347
+    },
+    "rate": {
+      "mse": 32.10221386524602,
+      "mae": 4.2037748181322225,
+      "r2": 0.7770219268663219
+    },
+    "n_samples": 503
+  },
+  "parameters": 997825,
+  "eval_seconds": 1.6511421203613281,
+  "n_test_samples": 503,
+  "baseline_reference": {
+    "source": "search_results/mimo64_nas/architectures/best.json",
+    "split": "val",
+    "metrics": {
+      "M_real": {
+        "mse": 0.038827824981264754,
+        "mae": 0.12883850583025286
+      },
+      "M_imag": {
+        "mse": 0.03898848698580004,
+        "mae": 0.1293491589525348
+      },
+      "M": {
+        "mse": 0.0389081559835324,
+        "n_mse": 0.46003241681084284,
+        "r2": 0.5399176202114393,
+        "cos": 0.7406802650738304
+      },
+      "rate": {
+        "mse": 31.46152940753914,
+        "mae": 4.157721911936584,
+        "r2": 0.7814720431874531
+      },
+      "n_samples": 503,
+      "parameters": 997825,
+      "latency_ms": 0.5158392999874195,
+      "epochs_run": 15,
+      "arch": {
+        "hidden_layers": [
+          256,
+          256,
+          128,
+          64
+        ],
+        "activation": "leaky_relu",
+        "dropout": 0.1,
+        "batchnorm": false,
+        "residual": true,
+        "head": "deep",
+        "input_dim": 10,
+        "output_dim": 25601
+      },
+      "arch_name": "h256x256x128x64-leaky_relu-d0.1-nobn-deep",
+      "score": 1.055885540253829,
+      "train_seconds": 85.97074127197266,
+      "tag": "final"
+    }
+  },
+  "delta_vs_baseline": {
+    "split": "val",
+    "rate_r2": -0.004450116321131237,
+    "M_cos": 0.002431592219604206,
+    "M_n_mse": -0.0048294060871725275
+  }
+}

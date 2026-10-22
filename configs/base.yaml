@@ -1,0 +1,19 @@
+project:
+  name: RHS-DL-Development
+  seed: 42
+
+system:
+  Nr: 2
+  Nx: 16
+  Nt: 256
+  L: 4
+  RFno: 1
+
+channel:
+  frequency_ghz: [7, 15]
+  snr_db: [0, 40]
+
+training:
+  batch_size: 32
+  epochs: 10
+  learning_rate: 0.001
