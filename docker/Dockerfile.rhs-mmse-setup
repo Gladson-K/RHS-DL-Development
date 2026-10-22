@@ -1,0 +1,39 @@
+install:
+	pip install -e .
+
+dev:
+	pip install -e ".[dev]"
+
+test:
+	pytest -v
+
+lint:
+	ruff check src tests scripts
+
+format:
+	black src tests scripts
+
+validate-gp:
+	python scripts/validate_gp.py
+
+generate:
+	python scripts/generate_dataset.py \
+		--config configs/dataset/v1_fixed.yaml \
+		--output data/processed/v1
+
+train:
+	python scripts/train.py \
+		--dataset data/processed/v1 \
+		--model configs/model/holobeam_gen_v1.yaml \
+		--training configs/training/physics_aware.yaml
+
+evaluate:
+	python scripts/evaluate.py \
+		--checkpoint checkpoints/best.pt \
+		--dataset data/processed/v1
+
+benchmark:
+	python scripts/benchmark.py \
+		--checkpoint checkpoints/best.pt
+
+all: test validate-gp

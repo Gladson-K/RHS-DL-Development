@@ -1,0 +1,49 @@
+# Multi-model NAS search over the real 64x64 MIMO dataset.
+# Runs many architecture candidates in one shot (successive halving) and
+# selects the best Pareto/scored setup. Consumed by scripts/search_nas_real.py
+# and SearchConfig in src/rhs_beamforming/nas/real_search.py.
+search:
+  name: real_multisearch_64x64
+  dataset: real_64x64_mimo
+  cache: data/processed/mimo64_5000.npz
+  output_dir: search_results/mimo64_nas
+  seed: 42
+
+  # "random" samples N architectures; "evolution" runs a population + mutation
+  # + crossover loop across generations.
+  strategy: random
+  num_candidates: 12
+  population: 8
+  generations: 2
+
+  # successive halving: short budget first, promote top-k to longer final runs
+  halving: true
+  budget_epochs: 4
+  final_epochs: 15
+  top_k: 3
+
+  training:
+    batch_size: 64
+    lr: 0.001
+    weight_decay: 0.0001
+    optimizer: adam
+    early_stop_patience: 6
+    device: cpu
+    torch_threads: 8
+
+  loss:
+    m_weight: 1.0
+    rate_weight: 1.0
+
+  # multi-objective score (ScoreWeights in real_objective.py)
+  #   alpha_rate * rate_r2
+  #   + beta_similarity * M_similarity
+  #   - gamma_latency * latency_ms
+  #   - delta_params * params_millions
+  #   - epsilon_constraint * constraint_violation
+  score:
+    alpha_rate: 1.0
+    beta_similarity: 0.5
+    gamma_latency: 0.05
+    delta_params: 0.02
+    epsilon_constraint: 0.0

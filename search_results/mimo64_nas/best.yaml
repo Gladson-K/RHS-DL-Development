@@ -1,0 +1,21 @@
+architecture:
+  hidden_layers:
+    - 256
+    - 256
+    - 128
+    - 64
+  activation: leaky_relu
+  dropout: 0.1
+  batchnorm: False
+  residual: True
+  head: deep
+  input_dim: 10
+  output_dim: 25601
+metrics:
+  score: 1.055885540253829
+  rate_r2: 0.7814720431874531
+  rate_mse: 31.46152940753914
+  beamforming_similarity: 0.7406802650738304
+  M_n_mse: 0.46003241681084284
+  latency_ms: 0.5158392999874195
+  parameters: 997825

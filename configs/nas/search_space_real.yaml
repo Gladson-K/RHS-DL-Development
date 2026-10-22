@@ -1,0 +1,23 @@
+# RHS-specific NAS search space for the real 64x64 config -> (M, rate) task.
+# Mirrors RealSearchSpace in src/rhs_beamforming/nas/real_space.py.
+search_space:
+  input_dim: 10
+  output_dim: 25601  # 2 * 20 * 64 * 10 + 1
+
+  hidden_layer_choices:
+    - [1024, 512, 256, 128, 64]
+    - [512, 256, 128]
+    - [768, 384, 192, 96]
+    - [1024, 768, 384, 192]
+    - [512, 512, 256, 128]
+    - [256, 256, 128, 64]
+    - [1024, 512, 256]
+    - [384, 192, 96, 48]
+    - [2048, 1024, 512, 256]
+    - [640, 320, 160, 80]
+
+  activation_choices: [relu, leaky_relu, gelu, prelu, elu, silu]
+  dropout_choices: [0.0, 0.05, 0.1, 0.15, 0.2, 0.3]
+  batchnorm_choices: [true, false]
+  residual_choices: [true, false]
+  head_choices: [dense, residual, deep]

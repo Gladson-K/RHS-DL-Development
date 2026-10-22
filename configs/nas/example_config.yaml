@@ -1,0 +1,39 @@
+Dataset:
+    500 representative scenarios
+
+System:
+    Nr = 2
+    Nx = 16
+    Nt = 256
+    L = 4
+    RFno = 1
+
+Frequency:
+    7–15 GHz
+
+SNR:
+    0–40 dB
+
+NAS:
+    trials = 20
+
+Hidden:
+    128 / 256
+
+Depth:
+    2 / 4 / 6
+
+GNN:
+    enabled / disabled
+
+Attention:
+    2 / 4 / 8 heads
+
+Conditioning:
+    Add / FiLM / CrossAttention
+
+M:
+    RealImag / AmplitudePhase
+
+w:
+    RealImag / AmplitudePhase

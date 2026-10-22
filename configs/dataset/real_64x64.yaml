@@ -1,0 +1,41 @@
+dataset:
+  name: real_64x64_mimo
+  source: hdf5
+  zip: 64x64_MIMO_beamforming_dataset.zip
+  h5: data/raw/64x64_MIMO_beamforming_dataset.h5
+  cache: data/processed/mimo64_5000.npz
+  samples: 5000
+  seed: 42
+
+  schema:
+    Nt: 64
+    Nr: 64
+    max_test_size: 20
+    max_rfno: 10
+    metadata_columns: 15
+    rate_column: 12
+
+  input:
+    feature_indices: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+    feature_names: [L, lamd, scale, SNR_db, Pt, deH, test_size, RFno, stepSize1, noise_var]
+    dim: 10
+
+  target:
+    # [Re(M) (20*64*10), Im(M) (20*64*10), rate]
+    M_shape: [20, 64, 10]
+    elements_per_sample: 12800
+    rate: true
+    dim: 25601
+
+  splits:
+    train: 0.8
+    val: 0.1
+    test: 0.1
+    stratify: [SNR_db, frequency, RFno]
+
+  physics:
+    frequency_ghz: [7, 15]
+    band: FP3
+    snr_db: [10, 30]
+    L_range: [2, 7]
+    RFno_range: [1, 9]

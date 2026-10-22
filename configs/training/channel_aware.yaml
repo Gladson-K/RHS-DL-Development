@@ -1,0 +1,49 @@
+training:
+  seed: 42
+
+  epochs: 100
+  batch_size: 32
+
+  optimizer:
+    name: "adamw"
+    lr: 0.0003
+    weight_decay: 0.0001
+
+  scheduler:
+    name: "cosine"
+    min_lr: 0.000001
+
+  precision:
+    mode: "bf16"
+
+  gradient:
+    clip_norm: 1.0
+
+loss:
+  beamforming:
+    M: 1.0
+    w: 1.0
+
+  rate:
+    enabled: true
+    weight: 2.0
+
+  power:
+    enabled: true
+    weight: 0.5
+
+  phase:
+    enabled: true
+    weight: 0.5
+
+  fairness:
+    enabled: false
+    weight: 0.1
+
+validation:
+  metric: "normalized_rate_ratio"
+
+checkpoint:
+  monitor: "val_rate_ratio"
+  mode: "max"
+  save_best: true
