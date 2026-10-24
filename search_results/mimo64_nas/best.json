@@ -1,0 +1,26 @@
+{
+  "architecture": {
+    "hidden_layers": [
+      384,
+      192,
+      96,
+      48
+    ],
+    "activation": "elu",
+    "dropout": 0.0,
+    "batchnorm": false,
+    "residual": true,
+    "head": "deep",
+    "input_dim": 10,
+    "output_dim": 25601
+  },
+  "metrics": {
+    "score": 1.0986936545001267,
+    "rate_r2": 0.7877445875032445,
+    "rate_mse": 30.55846949552684,
+    "beamforming_similarity": 0.7687776029601275,
+    "M_n_mse": 0.4107237149970242,
+    "latency_ms": 0.23543489987787325,
+    "parameters": 839633
+  }
+}

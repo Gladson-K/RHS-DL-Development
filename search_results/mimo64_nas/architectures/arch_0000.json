@@ -1,13 +1,13 @@
 {
   "architecture": {
     "hidden_layers": [
-      256,
-      256,
-      128,
-      64
+      384,
+      192,
+      96,
+      48
     ],
-    "activation": "leaky_relu",
-    "dropout": 0.1,
+    "activation": "elu",
+    "dropout": 0.0,
     "batchnorm": false,
     "residual": true,
     "head": "deep",
@@ -16,47 +16,47 @@
   },
   "metrics": {
     "M_real": {
-      "mse": 0.038827824981264754,
-      "mae": 0.12883850583025286
+      "mse": 0.034668711061269106,
+      "mae": 0.12043656639265966
     },
     "M_imag": {
-      "mse": 0.03898848698580004,
-      "mae": 0.1293491589525348
+      "mse": 0.034806837988184174,
+      "mae": 0.1209031819823248
     },
     "M": {
-      "mse": 0.0389081559835324,
-      "n_mse": 0.46003241681084284,
-      "r2": 0.5399176202114393,
-      "cos": 0.7406802650738304
+      "mse": 0.03473777452472664,
+      "n_mse": 0.4107237149970242,
+      "r2": 0.5892316773208414,
+      "cos": 0.7687776029601275
     },
     "rate": {
-      "mse": 31.46152940753914,
-      "mae": 4.157721911936584,
-      "r2": 0.7814720431874531
+      "mse": 30.55846949552684,
+      "mae": 4.204084453241489,
+      "r2": 0.7877445875032445
     },
     "n_samples": 503,
-    "parameters": 997825,
-    "latency_ms": 0.5158392999874195,
+    "parameters": 839633,
+    "latency_ms": 0.23543489987787325,
     "epochs_run": 15,
     "arch": {
       "hidden_layers": [
-        256,
-        256,
-        128,
-        64
+        384,
+        192,
+        96,
+        48
       ],
-      "activation": "leaky_relu",
-      "dropout": 0.1,
+      "activation": "elu",
+      "dropout": 0.0,
       "batchnorm": false,
       "residual": true,
       "head": "deep",
       "input_dim": 10,
       "output_dim": 25601
     },
-    "arch_name": "h256x256x128x64-leaky_relu-d0.1-nobn-deep",
-    "score": 1.055885540253829,
-    "train_seconds": 85.97074127197266,
+    "arch_name": "h384x192x96x48-elu-d0.0-nobn-deep",
+    "score": 1.0986936545001267,
+    "train_seconds": 74.2674834728241,
     "tag": "final"
   },
-  "name": "h256x256x128x64-leaky_relu-d0.1-nobn-deep"
+  "name": "h384x192x96x48-elu-d0.0-nobn-deep"
 }
