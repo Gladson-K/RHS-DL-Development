@@ -1,0 +1,165 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RHS Beamforming - Model Comparison Dashboard</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #f5f7fa; }
+        header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem; text-align: center; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 2rem; }
+        .section { background: white; margin: 2rem 0; padding: 2rem; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        h2 { color: #333; margin-bottom: 1.5rem; border-bottom: 3px solid #667eea; padding-bottom: 0.5rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(600px, 1fr)); gap: 2rem; }
+        .card { border: 1px solid #e0e0e0; border-radius: 8px; padding: 1rem; }
+        img { width: 100%; height: auto; border-radius: 8px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 1rem; }
+        th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background: #667eea; color: white; }
+        tr:hover { background: #f5f5f5; }
+        .badge { display: inline-block; padding: 4px 8px; border-radius: 4px; font-size: 0.85em; }
+        .badge-success { background: #d4edda; color: #155724; }
+        .badge-info { background: #d1ecf1; color: #0c5460; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🚀 RHS Beamforming Model Comparison Dashboard</h1>
+        <p>Hybrid_jev (GNN + Transformer + JEV) with Gradient Projection Algorithm Integration</p>
+        <p>Trained on Full 15K Dataset | Ready for Review</p>
+    </header>
+    
+    <div class="container">
+        <div class="section">
+            <h2>📊 Final Results Summary</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Model</th>
+                        <th>Rate R²</th>
+                        <th>Rate MAE</th>
+                        <th>M Cosine</th>
+                        <th>M nMSE</th>
+                        <th>M R²</th>
+                        <th>Parameters</th>
+                        <th>Latency (ms)</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>hybrid_jev (Full 15K)</strong></td>
+                        <td><strong>0.8044</strong></td>
+                        <td><strong>4.026</strong></td>
+                        <td><strong>0.7772</strong></td>
+                        <td><strong>0.3961</strong></td>
+                        <td><strong>0.6038</strong></td>
+                        <td>4.08M</td>
+                        <td>8.3</td>
+                        <td><span class="badge badge-success">✓ Best M Fidelity</span></td>
+                    </tr>
+                    <tr>
+                        <td>transformer</td>
+                        <td>0.8071</td>
+                        <td>3.997</td>
+                        <td>0.7507</td>
+                        <td>0.4396</td>
+                        <td>0.5604</td>
+                        <td>3.70M</td>
+                        <td>3.29</td>
+                        <td><span class="badge badge-info">Best Rate</span></td>
+                    </tr>
+                    <tr>
+                        <td>gnn</td>
+                        <td>0.7950</td>
+                        <td>4.045</td>
+                        <td>0.7582</td>
+                        <td>0.4258</td>
+                        <td>0.5741</td>
+                        <td>3.64M</td>
+                        <td>4.86</td>
+                        <td><span class="badge">Good Balance</span></td>
+                    </tr>
+                    <tr>
+                        <td>hybrid</td>
+                        <td>0.7948</td>
+                        <td>4.088</td>
+                        <td>0.7493</td>
+                        <td>0.4401</td>
+                        <td>0.5599</td>
+                        <td>4.03M</td>
+                        <td>6.05</td>
+                        <td><span class="badge">Expressive</span></td>
+                    </tr>
+                    <tr>
+                        <td>mlp</td>
+                        <td>0.7937</td>
+                        <td>4.026</td>
+                        <td>0.7406</td>
+                        <td>0.4560</td>
+                        <td>0.5440</td>
+                        <td>0.998M</td>
+                        <td>0.24</td>
+                        <td><span class="badge badge-info">Fastest</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>GP Algorithm</strong></td>
+                        <td>~0.80</td>
+                        <td>—</td>
+                        <td>Reference</td>
+                        <td>—</td>
+                        <td>—</td>
+                        <td>Classical</td>
+                        <td>50-500</td>
+                        <td><span class="badge">Ground Truth</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="section">
+            <h2>📈 Training & Validation Curves</h2>
+            <img src="png/all_models_training_validation.png" alt="Training Curves">
+        </div>
+        
+        <div class="section">
+            <h2>🔍 GP vs DL Comprehensive Comparison</h2>
+            <img src="png/gp_vs_dl_comprehensive.png" alt="GP vs DL Comparison">
+        </div>
+        
+        <div class="section">
+            <h2>📊 Magnitude Distribution Analysis</h2>
+            <img src="png/magnitude_distributions.png" alt="Magnitude Distributions">
+        </div>
+        
+        <div class="section">
+            <h2>🎯 Key Findings</h2>
+            <ul style="line-height: 2; margin-left: 2rem;">
+                <li><strong>Best Overall (M Fidelity):</strong> hybrid_jev on full 15K dataset achieves M cos 0.777 (+0.016 over 5K), M nMSE 0.396 (-0.026)</li>
+                <li><strong>Best Rate Performance:</strong> transformer achieves rate R² 0.807 with lowest latency among attention models (3.29ms)</li>
+                <li><strong>JEV Regularization Works:</strong> Spectral-consistency with classical EVD spectrum improves beamforming matrix fidelity</li>
+                <li><strong>GP Integration Complete:</strong> C++ and Python implementations of Gradient Projection algorithm integrated with unified product system</li>
+                <li><strong>Real-time Capable:</strong> DL models provide 8-10ms inference vs 50-500ms for iterative GP</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>📁 Artifacts</h2>
+            <ul style="line-height: 2; margin-left: 2rem;">
+                <li><strong>Trained Weights:</strong> <code>search_results/mimo64_full_data/checkpoints/hybrid_jev.pt</code></li>
+                <li><strong>GP C++ Implementation:</strong> <code>rhs_product/cpp/</code></li>
+                <li><strong>Unified Product System:</strong> <code>rhs_product/python/rhs_beamforming_product.py</code></li>
+                <li><strong>All Plots:</strong> <code>visualizations/png/</code>, <code>visualizations/pdf/</code>, <code>visualizations/svg/</code></li>
+                <li><strong>Results:</strong> <code>RHS-Best-Recipe-FullDataset.md</code>, <code>RHS-HaloBeamGNN-5Setups-FullResults.md</code></li>
+            </ul>
+        </div>
+    </div>
+    
+    <footer style="text-align: center; padding: 2rem; background: #333; color: white; margin-top: 3rem;">
+        <p>RHS-DL-Development | Generated for Senior AI/ML Engineer Review</p>
+    </footer>
+</body>
+</html>
