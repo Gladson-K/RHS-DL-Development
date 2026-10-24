@@ -1,62 +1,62 @@
 {
   "architecture": {
     "hidden_layers": [
-      768,
-      384,
-      192,
-      96
+      640,
+      320,
+      160,
+      80
     ],
-    "activation": "silu",
+    "activation": "gelu",
     "dropout": 0.0,
     "batchnorm": true,
     "residual": false,
-    "head": "dense",
+    "head": "residual",
     "input_dim": 10,
     "output_dim": 25601
   },
   "metrics": {
     "M_real": {
-      "mse": 0.03463544386755638,
-      "mae": 0.11451622661491985
+      "mse": 0.03626621284257347,
+      "mae": 0.12047592739461667
     },
     "M_imag": {
-      "mse": 0.03478641123231315,
-      "mae": 0.1149838202231921
+      "mse": 0.036411829620422,
+      "mae": 0.12095044600560698
     },
     "M": {
-      "mse": 0.03471092754993477,
-      "n_mse": 0.41040628852472383,
-      "r2": 0.5895491382680422,
-      "cos": 0.7802892605035129
+      "mse": 0.03633902123149773,
+      "n_mse": 0.42965613093413724,
+      "r2": 0.570297205181076,
+      "cos": 0.7605398717285179
     },
     "rate": {
-      "mse": 31.529714292370777,
-      "mae": 4.327849492401063,
-      "r2": 0.7809984392702771
+      "mse": 32.02822469479995,
+      "mae": 4.324735910707629,
+      "r2": 0.7775358466454398
     },
     "n_samples": 503,
-    "parameters": 2882369,
-    "latency_ms": 2.0212126999467728,
-    "epochs_run": 15,
+    "parameters": 2359121,
+    "latency_ms": 2.166224800021155,
+    "epochs_run": 12,
     "arch": {
       "hidden_layers": [
-        768,
-        384,
-        192,
-        96
+        640,
+        320,
+        160,
+        80
       ],
-      "activation": "silu",
+      "activation": "gelu",
       "dropout": 0.0,
       "batchnorm": true,
       "residual": false,
-      "head": "dense",
+      "head": "residual",
       "input_dim": 10,
       "output_dim": 25601
     },
-    "arch_name": "h768x384x192x96-silu-d0.0-bn-dense",
-    "score": 0.9647611672676356,
-    "train_seconds": 129.36956119537354,
+    "arch_name": "h640x320x160x80-gelu-d0.0-bn-residual",
+    "score": 0.9547631218429773,
+    "train_seconds": 112.1012191772461,
     "tag": "final"
   },
-  "name": "h768x384x192x96-silu-d0.0-bn-dense"
+  "name": "h640x320x160x80-gelu-d0.0-bn-residual"
 }
