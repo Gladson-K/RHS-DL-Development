@@ -1,62 +1,62 @@
 {
   "architecture": {
     "hidden_layers": [
-      640,
-      320,
-      160,
-      80
+      512,
+      512,
+      256,
+      128
     ],
-    "activation": "gelu",
-    "dropout": 0.0,
-    "batchnorm": true,
-    "residual": false,
-    "head": "residual",
+    "activation": "silu",
+    "dropout": 0.2,
+    "batchnorm": false,
+    "residual": true,
+    "head": "deep",
     "input_dim": 10,
     "output_dim": 25601
   },
   "metrics": {
     "M_real": {
-      "mse": 0.03626621284257347,
-      "mae": 0.12047592739461667
+      "mse": 0.035917595319198095,
+      "mae": 0.12167654594891587
     },
     "M_imag": {
-      "mse": 0.036411829620422,
-      "mae": 0.12095044600560698
+      "mse": 0.036063927713018765,
+      "mae": 0.12216808887883636
     },
     "M": {
-      "mse": 0.03633902123149773,
-      "n_mse": 0.42965613093413724,
-      "r2": 0.570297205181076,
-      "cos": 0.7605398717285179
+      "mse": 0.03599076151610843,
+      "n_mse": 0.42553846576860727,
+      "r2": 0.5744153175559882,
+      "cos": 0.7601407131278181
     },
     "rate": {
-      "mse": 32.02822469479995,
-      "mae": 4.324735910707629,
-      "r2": 0.7775358466454398
+      "mse": 30.988615669265656,
+      "mae": 4.190862606344356,
+      "r2": 0.7847568444962134
     },
     "n_samples": 503,
-    "parameters": 2359121,
-    "latency_ms": 0.6908548999490449,
-    "epochs_run": 12,
+    "parameters": 2269057,
+    "latency_ms": 0.4420283999934327,
+    "epochs_run": 15,
     "arch": {
       "hidden_layers": [
-        640,
-        320,
-        160,
-        80
+        512,
+        512,
+        256,
+        128
       ],
-      "activation": "gelu",
-      "dropout": 0.0,
-      "batchnorm": true,
-      "residual": false,
-      "head": "residual",
+      "activation": "silu",
+      "dropout": 0.2,
+      "batchnorm": false,
+      "residual": true,
+      "head": "deep",
       "input_dim": 10,
       "output_dim": 25601
     },
-    "arch_name": "h640x320x160x80-gelu-d0.0-bn-residual",
-    "score": 1.0285316168465828,
-    "train_seconds": 90.92109322547913,
+    "arch_name": "h512x512x256x128-silu-d0.2-nobn-deep",
+    "score": 1.0509248463363445,
+    "train_seconds": 137.71488904953003,
     "tag": "final"
   },
-  "name": "h640x320x160x80-gelu-d0.0-bn-residual"
+  "name": "h512x512x256x128-silu-d0.2-nobn-deep"
 }
