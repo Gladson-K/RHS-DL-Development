@@ -20,20 +20,41 @@ _DEFAULTS = {
     "cache": "data/processed/mimo64_5000.npz",
     "samples": 5000,
     "strategy": "random",
-    "num_candidates": 10,
+    "num_candidates": 12,
     "population": 8,
     "generations": 2,
-    "budget_epochs": 6,
-    "final_epochs": 25,
+    "budget_epochs": 8,
+    "final_epochs": 30,
     "top_k": 3,
     "batch_size": 64,
     "lr": 1e-3,
     "weight_decay": 1e-4,
+    "optimizer": "adam",
+    "scheduler": "cosine",
+    "grad_clip": 1.0,
+    "early_stop_patience": 8,
+    "m_weight": 1.0,
+    "rate_weight": 1.0,
+    "device": "cpu",
     "seed": 42,
     "threads": 0,
     "halving": True,
     "output": "search_results/mimo64_nas",
 }
+
+# Training/loss keys that YAML is authoritative for. Previously several of these
+# were silently dropped, so a config edit changed nothing in the search.
+_YAML_TRAINING_KEYS = (
+    "batch_size",
+    "lr",
+    "weight_decay",
+    "optimizer",
+    "scheduler",
+    "grad_clip",
+    "early_stop_patience",
+    "device",
+)
+_YAML_LOSS_KEYS = ("m_weight", "rate_weight")
 
 
 def _load_yaml_config(path: str) -> dict:
@@ -42,6 +63,7 @@ def _load_yaml_config(path: str) -> dict:
     doc = yaml.safe_load(Path(path).read_text()) or {}
     search = doc.get("search", doc)
     training = search.get("training", {})
+    loss = search.get("loss", {})
     out = {
         "strategy": search.get("strategy"),
         "num_candidates": search.get("num_candidates"),
@@ -55,7 +77,8 @@ def _load_yaml_config(path: str) -> dict:
         "halving": search.get("halving"),
         "cache": search.get("cache"),
     }
-    out.update({k: training.get(k) for k in ("batch_size", "lr", "weight_decay")})
+    out.update({k: training.get(k) for k in _YAML_TRAINING_KEYS})
+    out.update({k: loss.get(k) for k in _YAML_LOSS_KEYS})
     out["threads"] = training.get("torch_threads")
     out["score"] = search.get("score", {})
     return {k: v for k, v in out.items() if v is not None}
@@ -113,6 +136,13 @@ def main():
         batch_size=int(values["batch_size"]),
         lr=float(values["lr"]),
         weight_decay=float(values["weight_decay"]),
+        optimizer=str(values["optimizer"]),
+        scheduler=str(values["scheduler"]),
+        grad_clip=float(values["grad_clip"]),
+        early_stop_patience=int(values["early_stop_patience"]),
+        m_weight=float(values["m_weight"]),
+        rate_weight=float(values["rate_weight"]),
+        device=str(values["device"]),
         seed=int(values["seed"]),
         torch_threads=int(values["threads"]),
         halving=bool(values["halving"]),

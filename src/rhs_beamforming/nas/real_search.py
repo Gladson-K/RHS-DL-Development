@@ -41,6 +41,8 @@ class SearchConfig:
     lr: float = 1e-3
     weight_decay: float = 1e-4
     optimizer: str = "adam"
+    scheduler: str = "cosine"
+    grad_clip: float = 1.0
     m_weight: float = 1.0
     rate_weight: float = 1.0
     early_stop_patience: int = 6
@@ -91,6 +93,8 @@ class MultiModelSearch:
             lr=self.cfg.lr,
             weight_decay=self.cfg.weight_decay,
             optimizer=self.cfg.optimizer,
+            scheduler=self.cfg.scheduler,
+            grad_clip=self.cfg.grad_clip,
             m_weight=self.cfg.m_weight,
             rate_weight=self.cfg.rate_weight,
             early_stop_patience=self.cfg.early_stop_patience,
@@ -148,10 +152,13 @@ class MultiModelSearch:
             candidates = self._sample(cfg.num_candidates)
             active = candidates
             if cfg.halving:
-                rungs = [
-                    (0.25, max(1, cfg.budget_epochs // 2)),
-                    (0.5, cfg.budget_epochs),
-                ]
+                # Rung 1: 25% of train data at half the budget; rung 2: 50% of
+                # train data at the full budget. The second rung is forced to a
+                # strictly larger epoch budget so the cheap rung can never cost
+                # as much as the next one (degenerate when budget_epochs < 3).
+                e1 = max(1, cfg.budget_epochs // 2)
+                e2 = max(e1 + 1, cfg.budget_epochs)
+                rungs = [(0.25, e1), (0.5, e2)]
                 for frac, ep in rungs:
                     n_tr = max(1, int(len(train_idx) * frac))
                     sub_tr = np.sort(self.rng.sample(list(train_idx), n_tr))

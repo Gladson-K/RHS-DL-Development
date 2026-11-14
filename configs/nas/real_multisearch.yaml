@@ -1,12 +1,16 @@
-# Multi-model NAS search over the real 64x64 MIMO dataset.
-# Runs many architecture candidates in one shot (successive halving) and
-# selects the best Pareto/scored setup. Consumed by scripts/search_nas_real.py
-# and SearchConfig in src/rhs_beamforming/nas/real_search.py.
+# Canonical NAS search configuration (budget variant B4: cheap rung).
+# Multi-model NAS over the real 64x64 MIMO dataset (5K cache).
+# Consumed by scripts/search_nas_real.py and SearchConfig in
+# src/rhs_beamforming/nas/real_search.py.
+#
+# All training/loss hyper-parameters below are authoritative: the loader in
+# scripts/search_nas_real.py forwards every key here into SearchConfig ->
+# TrainConfig. Do not edit values without re-recording docs/NAS-Hyperparameters.md.
 search:
-  name: real_multisearch_64x64
+  name: real_multisearch_64x64_b4
   dataset: real_64x64_mimo
   cache: data/processed/mimo64_5000.npz
-  output_dir: search_results/mimo64_nas
+  output_dir: search_results/nas_study/random_b4
   seed: 42
 
   # "random" samples N architectures; "evolution" runs a population + mutation
@@ -27,6 +31,8 @@ search:
     lr: 0.001
     weight_decay: 0.0001
     optimizer: adam
+    scheduler: cosine
+    grad_clip: 1.0
     early_stop_patience: 6
     device: cpu
     torch_threads: 8

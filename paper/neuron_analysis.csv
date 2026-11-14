@@ -1,0 +1,123 @@
+model,layer,type,in,out,neurons,connections,parameters,note
+mlp,net.0,Linear,10,256,256,2560,2816,dense
+mlp,net.3.fc,Linear,256,256,256,65536,65792,dense
+mlp,net.4.fc,Linear,256,128,128,32768,32896,dense
+mlp,net.4.skip,Linear,256,128,128,32768,32896,dense
+mlp,net.5.fc,Linear,128,64,64,8192,8256,dense
+mlp,net.5.skip,Linear,128,64,64,8192,8256,dense
+mlp,net.6,Linear,64,32,32,2048,2080,dense
+mlp,net.9,Linear,32,25601,25601,819232,844833,dense
+gnn,stem.proj,Linear,10,128,128,1280,1408,dense
+gnn,stem.norm,LayerNorm,128,128,128,0,256,per-feature affine
+gnn,blocks.0.msg.0,Linear,128,128,128,16384,16512,dense
+gnn,blocks.0.msg.2,Linear,128,128,128,16384,16512,dense
+gnn,blocks.0.norm,LayerNorm,128,128,128,0,256,per-feature affine
+gnn,blocks.0.ffn.0,Linear,128,512,512,65536,66048,dense
+gnn,blocks.0.ffn.3,Linear,512,128,128,65536,65664,dense
+gnn,blocks.0.norm2,LayerNorm,128,128,128,0,256,per-feature affine
+gnn,blocks.1.msg.0,Linear,128,128,128,16384,16512,dense
+gnn,blocks.1.msg.2,Linear,128,128,128,16384,16512,dense
+gnn,blocks.1.norm,LayerNorm,128,128,128,0,256,per-feature affine
+gnn,blocks.1.ffn.0,Linear,128,512,512,65536,66048,dense
+gnn,blocks.1.ffn.3,Linear,512,128,128,65536,65664,dense
+gnn,blocks.1.norm2,LayerNorm,128,128,128,0,256,per-feature affine
+gnn,norm,LayerNorm,128,128,128,0,256,per-feature affine
+gnn,head.0,LayerNorm,128,128,128,0,256,per-feature affine
+gnn,head.1,Linear,128,25601,25601,3276928,3302529,dense
+gnn,stem.tokens,Parameter,128,16,2048,2048,2048,"learned tensor (1, 16, 128)"
+gnn,blocks.0.adj,Parameter,16,16,256,256,256,"learned tensor (16, 16)"
+gnn,blocks.1.adj,Parameter,16,16,256,256,256,"learned tensor (16, 16)"
+transformer,stem.proj,Linear,10,128,128,1280,1408,dense
+transformer,stem.norm,LayerNorm,128,128,128,0,256,per-feature affine
+transformer,blocks.0.attn.attn,MultiheadAttention,128,128,128,49152,49536,"4 heads, head_dim=32, q/k/v+attn"
+transformer,blocks.0.attn.attn.out_proj,Linear,128,128,128,16384,16512,dense
+transformer,blocks.0.attn.norm,LayerNorm,128,128,128,0,256,per-feature affine
+transformer,blocks.0.norm,LayerNorm,128,128,128,0,256,per-feature affine
+transformer,blocks.0.ffn.0,Linear,128,512,512,65536,66048,dense
+transformer,blocks.0.ffn.3,Linear,512,128,128,65536,65664,dense
+transformer,blocks.1.attn.attn,MultiheadAttention,128,128,128,49152,49536,"4 heads, head_dim=32, q/k/v+attn"
+transformer,blocks.1.attn.attn.out_proj,Linear,128,128,128,16384,16512,dense
+transformer,blocks.1.attn.norm,LayerNorm,128,128,128,0,256,per-feature affine
+transformer,blocks.1.norm,LayerNorm,128,128,128,0,256,per-feature affine
+transformer,blocks.1.ffn.0,Linear,128,512,512,65536,66048,dense
+transformer,blocks.1.ffn.3,Linear,512,128,128,65536,65664,dense
+transformer,norm,LayerNorm,128,128,128,0,256,per-feature affine
+transformer,head.0,LayerNorm,128,128,128,0,256,per-feature affine
+transformer,head.1,Linear,128,25601,25601,3276928,3302529,dense
+transformer,stem.tokens,Parameter,128,16,2048,2048,2048,"learned tensor (1, 16, 128)"
+hybrid,stem.proj,Linear,10,128,128,1280,1408,dense
+hybrid,stem.norm,LayerNorm,128,128,128,0,256,per-feature affine
+hybrid,blocks.0.msg.0,Linear,128,128,128,16384,16512,dense
+hybrid,blocks.0.msg.2,Linear,128,128,128,16384,16512,dense
+hybrid,blocks.0.norm,LayerNorm,128,128,128,0,256,per-feature affine
+hybrid,blocks.0.ffn.0,Linear,128,512,512,65536,66048,dense
+hybrid,blocks.0.ffn.3,Linear,512,128,128,65536,65664,dense
+hybrid,blocks.0.norm2,LayerNorm,128,128,128,0,256,per-feature affine
+hybrid,blocks.1.attn.attn,MultiheadAttention,128,128,128,49152,49536,"4 heads, head_dim=32, q/k/v+attn"
+hybrid,blocks.1.attn.attn.out_proj,Linear,128,128,128,16384,16512,dense
+hybrid,blocks.1.attn.norm,LayerNorm,128,128,128,0,256,per-feature affine
+hybrid,blocks.1.norm,LayerNorm,128,128,128,0,256,per-feature affine
+hybrid,blocks.1.ffn.0,Linear,128,512,512,65536,66048,dense
+hybrid,blocks.1.ffn.3,Linear,512,128,128,65536,65664,dense
+hybrid,blocks.2.msg.0,Linear,128,128,128,16384,16512,dense
+hybrid,blocks.2.msg.2,Linear,128,128,128,16384,16512,dense
+hybrid,blocks.2.norm,LayerNorm,128,128,128,0,256,per-feature affine
+hybrid,blocks.2.ffn.0,Linear,128,512,512,65536,66048,dense
+hybrid,blocks.2.ffn.3,Linear,512,128,128,65536,65664,dense
+hybrid,blocks.2.norm2,LayerNorm,128,128,128,0,256,per-feature affine
+hybrid,blocks.3.attn.attn,MultiheadAttention,128,128,128,49152,49536,"4 heads, head_dim=32, q/k/v+attn"
+hybrid,blocks.3.attn.attn.out_proj,Linear,128,128,128,16384,16512,dense
+hybrid,blocks.3.attn.norm,LayerNorm,128,128,128,0,256,per-feature affine
+hybrid,blocks.3.norm,LayerNorm,128,128,128,0,256,per-feature affine
+hybrid,blocks.3.ffn.0,Linear,128,512,512,65536,66048,dense
+hybrid,blocks.3.ffn.3,Linear,512,128,128,65536,65664,dense
+hybrid,norm,LayerNorm,128,128,128,0,256,per-feature affine
+hybrid,head.0,LayerNorm,128,128,128,0,256,per-feature affine
+hybrid,head.1,Linear,128,25601,25601,3276928,3302529,dense
+hybrid,stem.tokens,Parameter,128,16,2048,2048,2048,"learned tensor (1, 16, 128)"
+hybrid,blocks.0.adj,Parameter,16,16,256,256,256,"learned tensor (16, 16)"
+hybrid,blocks.2.adj,Parameter,16,16,256,256,256,"learned tensor (16, 16)"
+hybrid_jev,stem.proj,Linear,10,128,128,1280,1408,dense
+hybrid_jev,stem.norm,LayerNorm,128,128,128,0,256,per-feature affine
+hybrid_jev,blocks.0.msg.0,Linear,128,128,128,16384,16512,dense
+hybrid_jev,blocks.0.msg.2,Linear,128,128,128,16384,16512,dense
+hybrid_jev,blocks.0.norm,LayerNorm,128,128,128,0,256,per-feature affine
+hybrid_jev,blocks.0.ffn.0,Linear,128,512,512,65536,66048,dense
+hybrid_jev,blocks.0.ffn.3,Linear,512,128,128,65536,65664,dense
+hybrid_jev,blocks.0.norm2,LayerNorm,128,128,128,0,256,per-feature affine
+hybrid_jev,blocks.1.attn.attn,MultiheadAttention,128,128,128,49152,49536,"4 heads, head_dim=32, q/k/v+attn"
+hybrid_jev,blocks.1.attn.attn.out_proj,Linear,128,128,128,16384,16512,dense
+hybrid_jev,blocks.1.attn.norm,LayerNorm,128,128,128,0,256,per-feature affine
+hybrid_jev,blocks.1.norm,LayerNorm,128,128,128,0,256,per-feature affine
+hybrid_jev,blocks.1.ffn.0,Linear,128,512,512,65536,66048,dense
+hybrid_jev,blocks.1.ffn.3,Linear,512,128,128,65536,65664,dense
+hybrid_jev,blocks.2.msg.0,Linear,128,128,128,16384,16512,dense
+hybrid_jev,blocks.2.msg.2,Linear,128,128,128,16384,16512,dense
+hybrid_jev,blocks.2.norm,LayerNorm,128,128,128,0,256,per-feature affine
+hybrid_jev,blocks.2.ffn.0,Linear,128,512,512,65536,66048,dense
+hybrid_jev,blocks.2.ffn.3,Linear,512,128,128,65536,65664,dense
+hybrid_jev,blocks.2.norm2,LayerNorm,128,128,128,0,256,per-feature affine
+hybrid_jev,blocks.3.attn.attn,MultiheadAttention,128,128,128,49152,49536,"4 heads, head_dim=32, q/k/v+attn"
+hybrid_jev,blocks.3.attn.attn.out_proj,Linear,128,128,128,16384,16512,dense
+hybrid_jev,blocks.3.attn.norm,LayerNorm,128,128,128,0,256,per-feature affine
+hybrid_jev,blocks.3.norm,LayerNorm,128,128,128,0,256,per-feature affine
+hybrid_jev,blocks.3.ffn.0,Linear,128,512,512,65536,66048,dense
+hybrid_jev,blocks.3.ffn.3,Linear,512,128,128,65536,65664,dense
+hybrid_jev,norm,LayerNorm,128,128,128,0,256,per-feature affine
+hybrid_jev,head.norm,LayerNorm,128,128,128,0,256,per-feature affine
+hybrid_jev,head.eig_mix,Linear,4,4,4,16,20,dense
+hybrid_jev,head.proj.0,Linear,256,128,128,32768,32896,dense
+hybrid_jev,head.proj.3,Linear,128,128,128,16384,16512,dense
+hybrid_jev,head.out,Linear,128,25601,25601,3276928,3302529,dense
+hybrid_jev,stem.tokens,Parameter,128,16,2048,2048,2048,"learned tensor (1, 16, 128)"
+hybrid_jev,blocks.0.adj,Parameter,16,16,256,256,256,"learned tensor (16, 16)"
+hybrid_jev,blocks.2.adj,Parameter,16,16,256,256,256,"learned tensor (16, 16)"
+nas_best (search_results/mimo64_nas/metrics/best.json),net.0,Linear,10,384,384,3840,4224,dense
+nas_best (search_results/mimo64_nas/metrics/best.json),net.3.fc,Linear,384,192,192,73728,73920,dense
+nas_best (search_results/mimo64_nas/metrics/best.json),net.3.skip,Linear,384,192,192,73728,73920,dense
+nas_best (search_results/mimo64_nas/metrics/best.json),net.4.fc,Linear,192,96,96,18432,18528,dense
+nas_best (search_results/mimo64_nas/metrics/best.json),net.4.skip,Linear,192,96,96,18432,18528,dense
+nas_best (search_results/mimo64_nas/metrics/best.json),net.5.fc,Linear,96,48,48,4608,4656,dense
+nas_best (search_results/mimo64_nas/metrics/best.json),net.5.skip,Linear,96,48,48,4608,4656,dense
+nas_best (search_results/mimo64_nas/metrics/best.json),net.6,Linear,48,24,24,1152,1176,dense
+nas_best (search_results/mimo64_nas/metrics/best.json),net.9,Linear,24,25601,25601,614424,640025,dense

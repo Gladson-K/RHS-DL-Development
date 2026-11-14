@@ -1,0 +1,21 @@
+architecture:
+  hidden_layers:
+    - 512
+    - 512
+    - 256
+    - 128
+  activation: silu
+  dropout: 0.2
+  batchnorm: False
+  residual: True
+  head: deep
+  input_dim: 10
+  output_dim: 25601
+metrics:
+  score: 1.0320065463343024
+  rate_r2: 0.7847568444962134
+  rate_mse: 30.988615669265656
+  beamforming_similarity: 0.7601407131278181
+  M_n_mse: 0.42553846576860727
+  latency_ms: 0.8203944000342744
+  parameters: 2269057

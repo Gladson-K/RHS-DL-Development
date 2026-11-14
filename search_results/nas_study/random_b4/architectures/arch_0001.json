@@ -1,0 +1,60 @@
+{
+  "architecture": {
+    "hidden_layers": [
+      512,
+      256,
+      128
+    ],
+    "activation": "relu",
+    "dropout": 0.3,
+    "batchnorm": false,
+    "residual": true,
+    "head": "dense",
+    "input_dim": 10,
+    "output_dim": 25601
+  },
+  "metrics": {
+    "M_real": {
+      "mse": 0.035550009877259876,
+      "mae": 0.12243950117653454
+    },
+    "M_imag": {
+      "mse": 0.03568755314790942,
+      "mae": 0.12291591151334183
+    },
+    "M": {
+      "mse": 0.03561878151258465,
+      "n_mse": 0.42114034265789557,
+      "r2": 0.5788139183359227,
+      "cos": 0.7619938215056321
+    },
+    "rate": {
+      "mse": 31.1835083250497,
+      "mae": 4.284466874291361,
+      "r2": 0.783403143812608
+    },
+    "n_samples": 503,
+    "parameters": 3636609,
+    "latency_ms": 1.2785736999830988,
+    "epochs_run": 15,
+    "arch": {
+      "hidden_layers": [
+        512,
+        256,
+        128
+      ],
+      "activation": "relu",
+      "dropout": 0.3,
+      "batchnorm": false,
+      "residual": true,
+      "head": "dense",
+      "input_dim": 10,
+      "output_dim": 25601
+    },
+    "arch_name": "h512x256x128-relu-d0.3-nobn-dense",
+    "score": 0.9819556485253873,
+    "train_seconds": 100.06462287902832,
+    "tag": "final"
+  },
+  "name": "h512x256x128-relu-d0.3-nobn-dense"
+}
