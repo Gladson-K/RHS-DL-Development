@@ -1,0 +1,62 @@
+{
+  "architecture": {
+    "hidden_layers": [
+      512,
+      512,
+      256,
+      128
+    ],
+    "activation": "silu",
+    "dropout": 0.2,
+    "batchnorm": false,
+    "residual": true,
+    "head": "deep",
+    "input_dim": 10,
+    "output_dim": 25601
+  },
+  "metrics": {
+    "M_real": {
+      "mse": 0.035587999408335146,
+      "mae": 0.11975148134629722
+    },
+    "M_imag": {
+      "mse": 0.03573635579103504,
+      "mae": 0.12024725184051939
+    },
+    "M": {
+      "mse": 0.03566217759968509,
+      "n_mse": 0.42165343833987545,
+      "r2": 0.5783007669278957,
+      "cos": 0.7633903930636089
+    },
+    "rate": {
+      "mse": 30.85511734281809,
+      "mae": 4.216315358580936,
+      "r2": 0.7856841076352231
+    },
+    "n_samples": 503,
+    "parameters": 2269057,
+    "latency_ms": 0.36013959997944767,
+    "epochs_run": 24,
+    "arch": {
+      "hidden_layers": [
+        512,
+        512,
+        256,
+        128
+      ],
+      "activation": "silu",
+      "dropout": 0.2,
+      "batchnorm": false,
+      "residual": true,
+      "head": "deep",
+      "input_dim": 10,
+      "output_dim": 25601
+    },
+    "arch_name": "h512x512x256x128-silu-d0.2-nobn-deep",
+    "score": 1.0577302263171842,
+    "train_seconds": 454.5654761791229,
+    "tag": "final"
+  },
+  "name": "h512x512x256x128-silu-d0.2-nobn-deep"
+}

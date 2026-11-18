@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Validation {{ report.cid }}</h1>
+<p class="muted">source → travel → destination integrity for sample {{ report.sample_id }}</p>
+
+<p>
+  <a href="/samples/{{ report.cid }}">[ sample ]</a>
+  <a href="/streams/{{ report.cid }}">[ stream ]</a>
+</p>
+
+<section class="card {{ 'ok' if report.validation.passed else 'bad' }}">
+  <h2>Result: {{ "PASS" if report.validation.passed else "ATTENTION" }}</h2>
+  <p>score {{ "%.4f"|format(report.validation.score) }}</p>
+</section>
+
+<section class="card">
+  <h2>Checks</h2>
+  <table>
+    <tr><th>check</th><th>state</th></tr>
+    {% for name, value in checks.items() %}
+    <tr><td>{{ name }}</td><td>{{ "PASS" if value else "FAIL" }}</td></tr>
+    {% endfor %}
+  </table>
+</section>
+
+<div class="cols">
+  <section class="card">
+    <h2>Source</h2>
+    <pre>{{ report.source }}</pre>
+  </section>
+  <section class="card">
+    <h2>Travel</h2>
+    <pre>{{ report.travel }}</pre>
+  </section>
+  <section class="card">
+    <h2>Destination</h2>
+    <pre>{{ report.destination }}</pre>
+  </section>
+</div>
+
+<section class="card">
+  <h2>GP vs DL diff</h2>
+  <table>
+    <tr><th>gp rate</th><td>{{ "%.4f"|format(diff.gp_rate) }}</td></tr>
+    <tr><th>dl rate</th><td>{{ "%.4f"|format(diff.dl_rate) }}</td></tr>
+    <tr><th>rate delta</th><td>{{ "%.4f"|format(diff.rate_delta) }}</td></tr>
+    <tr><th>M cosine</th><td>{{ "%.6f"|format(diff.m_cos) }}</td></tr>
+    <tr><th>M nMSE</th><td>{{ "%.6f"|format(diff.m_nmse) }}</td></tr>
+    <tr><th>GP hash</th><td><code>{{ diff.gp_hash }}</code></td></tr>
+    <tr><th>DL hash</th><td><code>{{ diff.dl_hash }}</code></td></tr>
+  </table>
+</section>
+
+<section class="card">
+  <h2>Machine-readable</h2>
+  <p><a href="/api/validation/{{ report.cid }}">[ open JSON ]</a></p>
+</section>
+{% endblock %}

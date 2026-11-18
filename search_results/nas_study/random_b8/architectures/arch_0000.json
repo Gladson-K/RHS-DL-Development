@@ -1,0 +1,62 @@
+{
+  "architecture": {
+    "hidden_layers": [
+      384,
+      192,
+      96,
+      48
+    ],
+    "activation": "elu",
+    "dropout": 0.0,
+    "batchnorm": false,
+    "residual": true,
+    "head": "deep",
+    "input_dim": 10,
+    "output_dim": 25601
+  },
+  "metrics": {
+    "M_real": {
+      "mse": 0.03493641362275565,
+      "mae": 0.12219005304112823
+    },
+    "M_imag": {
+      "mse": 0.035077011684774166,
+      "mae": 0.122648695230958
+    },
+    "M": {
+      "mse": 0.03500671265376491,
+      "n_mse": 0.4139035176462792,
+      "r2": 0.5860515293211217,
+      "cos": 0.7660365590990815
+    },
+    "rate": {
+      "mse": 30.829249114686878,
+      "mae": 4.143769402627205,
+      "r2": 0.7858637852016456
+    },
+    "n_samples": 503,
+    "parameters": 839633,
+    "latency_ms": 0.26162549993387074,
+    "epochs_run": 21,
+    "arch": {
+      "hidden_layers": [
+        384,
+        192,
+        96,
+        48
+      ],
+      "activation": "elu",
+      "dropout": 0.0,
+      "batchnorm": false,
+      "residual": true,
+      "head": "deep",
+      "input_dim": 10,
+      "output_dim": 25601
+    },
+    "arch_name": "h384x192x96x48-elu-d0.0-nobn-deep",
+    "score": 1.0940231105681526,
+    "train_seconds": 75.14115810394287,
+    "tag": "final"
+  },
+  "name": "h384x192x96x48-elu-d0.0-nobn-deep"
+}

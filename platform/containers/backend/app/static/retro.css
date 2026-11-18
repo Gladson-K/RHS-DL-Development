@@ -1,0 +1,167 @@
+:root {
+  --bg: #000;
+  --fg: #fff;
+  --dim: #a8a8a8;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--fg);
+}
+
+body {
+  font-family: "IBM Plex Mono", "Courier New", Courier, monospace;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0.035) 0,
+    rgba(255, 255, 255, 0.035) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  z-index: 9999;
+}
+
+a {
+  color: var(--fg);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--fg);
+}
+
+a:hover {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.masthead {
+  border-bottom: 2px solid var(--fg);
+  padding: 1rem 1.5rem;
+}
+
+.logo {
+  margin: 0;
+  font-size: 16px;
+  letter-spacing: 3px;
+}
+
+nav {
+  margin-top: 0.6rem;
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+nav a.on {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+main {
+  padding: 1.5rem;
+  max-width: 1240px;
+  margin: 0 auto;
+}
+
+h1, h2, h3 {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+h1 {
+  font-size: 20px;
+  border-bottom: 1px solid var(--fg);
+  padding-bottom: 0.4rem;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+th, td {
+  border: 1px solid var(--fg);
+  padding: 0.35rem 0.5rem;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  text-transform: uppercase;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.card {
+  border: 1px solid var(--fg);
+  padding: 1rem;
+  margin: 1rem 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.stat {
+  border: 1px solid var(--fg);
+  padding: 1rem;
+}
+
+.stat .n {
+  font-size: 28px;
+  letter-spacing: 2px;
+}
+
+.badge {
+  border: 1px solid var(--fg);
+  padding: 0 0.35rem;
+  font-size: 11px;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.muted { color: var(--dim); }
+
+.ok { border-left: 5px solid var(--fg); }
+.bad { border-left: 5px dashed var(--fg); }
+
+pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  border: 1px solid var(--fg);
+  padding: 0.75rem;
+  overflow-x: auto;
+}
+
+img {
+  max-width: 100%;
+  border: 1px solid var(--fg);
+  background: var(--fg);
+}
+
+footer {
+  border-top: 1px solid var(--fg);
+  padding: 1rem 1.5rem;
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+.cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1rem;
+}

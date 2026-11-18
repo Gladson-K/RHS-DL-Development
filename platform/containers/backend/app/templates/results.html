@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Published results</h1>
+<p class="muted">Every artifact below has a stable URL handled by the backend.</p>
+<table>
+  <tr><th>run</th><th>source</th><th>artifacts</th><th></th></tr>
+  {% for run, items in runs %}
+  <tr>
+    <td>{{ run }}</td>
+    <td>{{ items[0].source }}</td>
+    <td>{{ items|length }}</td>
+    <td><a href="/results/{{ run }}">[ browse ]</a></td>
+  </tr>
+  {% else %}
+  <tr><td colspan="4" class="muted">no artifacts indexed</td></tr>
+  {% endfor %}
+</table>
+{% endblock %}

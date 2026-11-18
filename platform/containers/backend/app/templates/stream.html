@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Stream {{ cid }}</h1>
+{% if urls %}
+<p><a href="/validation/{{ cid }}">[ validation ]</a> <a href="/samples/{{ cid }}">[ sample ]</a></p>
+{% endif %}
+
+<section class="card">
+  <h2>Frames</h2>
+  <table>
+    <tr><th>id</th><th>type</th><th>seq</th><th>payload</th></tr>
+    {% for row in frames %}
+    <tr>
+      <td>{{ row.id }}</td>
+      <td>{{ row.fields.get("type", "") }}</td>
+      <td>{{ row.fields.get("seq", "") }}</td>
+      <td><pre>{{ row.fields.get("payload", "") }}</pre></td>
+    </tr>
+    {% else %}
+    <tr><td colspan="4" class="muted">no frames recorded</td></tr>
+    {% endfor %}
+  </table>
+</section>
+{% endblock %}

@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Dashboard</h1>
+
+<div class="grid">
+  <div class="stat"><div class="muted">published samples</div><div class="n">{{ stats.samples }}</div></div>
+  <div class="stat"><div class="muted">validation reports</div><div class="n">{{ stats.reports }}</div></div>
+  <div class="stat"><div class="muted">indexed artifacts</div><div class="n">{{ stats.artifacts }}</div></div>
+  <div class="stat"><div class="muted">result runs</div><div class="n">{{ stats.runs }}</div></div>
+</div>
+
+<div class="cols">
+  <section class="card">
+    <h2>Service health</h2>
+    <table>
+      <tr><th>mongodb</th><td>{{ "OK" if db.mongo else "FALLBACK MEMORY" }}</td></tr>
+      <tr><th>redis</th><td>{{ "OK" if db.redis else "FALLBACK MEMORY" }}</td></tr>
+      <tr><th>inference</th><td>{{ models.get("active_model") or "unavailable" }}</td></tr>
+      <tr><th>active model</th><td>{{ active_model_service.get("model") if active_model_service else "-" }}</td></tr>
+    </table>
+    {% if models.get("error") %}<pre>{{ models.get("error") }}</pre>{% endif %}
+  </section>
+
+  <section class="card">
+    <h2>Registered models</h2>
+    <table>
+      <tr><th>name</th><th>kind</th><th>params</th><th>latency</th><th>state</th></tr>
+      {% for model in models.get("models", []) %}
+      <tr>
+        <td>{{ model.name }}</td>
+        <td>{{ model.kind }}</td>
+        <td>{{ "{:,}".format(model.parameters) }}</td>
+        <td>{{ "%.3f ms"|format(model.latency_ms) }}</td>
+        <td>{{ "READY" if model.available else "N/A" }}</td>
+      </tr>
+      {% else %}
+      <tr><td colspan="5" class="muted">no models loaded</td></tr>
+      {% endfor %}
+    </table>
+    <p><a href="/models">open model registry</a></p>
+  </section>
+</div>
+
+<section class="card">
+  <h2>Recent published samples</h2>
+  <table>
+    <tr><th>cid</th><th>sample</th><th>transport</th><th>device</th><th>gp rate</th><th>dl rate</th><th>validation</th></tr>
+    {% for sample in samples %}
+    <tr>
+      <td><a href="/samples/{{ sample.cid }}">{{ sample.cid }}</a></td>
+      <td>{{ sample.sample_id }}</td>
+      <td>{{ sample.transport }}</td>
+      <td>{{ sample.device_id }}</td>
+      <td colspan="2" class="muted">see report</td>
+      <td><a href="/validation/{{ sample.cid }}">[ validation ]</a></td>
+    </tr>
+    {% else %}
+    <tr><td colspan="7" class="muted">nothing published yet — run the gateway simulator</td></tr>
+    {% endfor %}
+  </table>
+</section>
+
+<section class="card">
+  <h2>Published result runs</h2>
+  <table>
+    <tr><th>run</th><th>artifacts</th><th></th></tr>
+    {% for run, items in runs %}
+    <tr>
+      <td>{{ run }}</td>
+      <td>{{ items|length }}</td>
+      <td><a href="/results/{{ run }}">[ open ]</a></td>
+    </tr>
+    {% else %}
+    <tr><td colspan="3" class="muted">no artifact directories mounted</td></tr>
+    {% endfor %}
+  </table>
+</section>
+{% endblock %}

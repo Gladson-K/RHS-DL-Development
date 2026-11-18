@@ -1,0 +1,4 @@
+# Optional hardware-transport dependencies for platform/gateway/bridge.py
+pyserial>=3.5
+paho-mqtt>=2.1
+opencv-python-headless>=4.10

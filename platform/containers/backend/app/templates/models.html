@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Model registry</h1>
+<p class="muted">JEV chooses among these profiles; the ACK handshake then switches the active model.</p>
+
+{% if models.get("error") %}<pre>{{ models.get("error") }}</pre>{% endif %}
+
+<section class="card">
+  <h2>Active</h2>
+  <p>
+    inference: <span class="badge">{{ models.get("active_model") or "unavailable" }}</span>
+    platform: <span class="badge">{{ active_model_service.get("model") if active_model_service else "-" }}</span>
+  </p>
+</section>
+
+<section class="card">
+  <h2>Profiles</h2>
+  <table>
+    <tr><th>name</th><th>kind</th><th>params</th><th>latency</th><th>centroid (JEV)</th><th>state</th></tr>
+    {% for model in models.get("models", []) %}
+    <tr>
+      <td>{{ model.name }}</td>
+      <td>{{ model.kind }}</td>
+      <td>{{ "{:,}".format(model.parameters) }}</td>
+      <td>{{ "%.3f ms"|format(model.latency_ms) }}</td>
+      <td>{{ model.centroid }}</td>
+      <td>{{ "READY" if model.available else "N/A" }}</td>
+    </tr>
+    {% else %}
+    <tr><td colspan="6" class="muted">no models loaded</td></tr>
+    {% endfor %}
+  </table>
+</section>
+
+<section class="card">
+  <h2>Force a switch (API)</h2>
+  <pre>POST /api/switch {"model": "hybrid_jev"}</pre>
+</section>
+{% endblock %}

@@ -129,6 +129,7 @@ class MultiModelSearch:
 
         if cfg.strategy == "evolution":
             population = self._sample(cfg.population)
+            active = population
             for gen in range(cfg.generations):
                 self._log(f"generation {gen}")
                 scored = []
@@ -147,6 +148,7 @@ class MultiModelSearch:
                             other = self.rng.choice(elites)[1]
                             children.append(self.space.crossover(parent, other, self.rng))
                     population = [a for _, a, _ in elites] + children
+                active = [a for _, a, _ in elites]
         else:
             # random + successive halving
             candidates = self._sample(cfg.num_candidates)

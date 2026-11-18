@@ -1,0 +1,62 @@
+{
+  "architecture": {
+    "hidden_layers": [
+      512,
+      512,
+      256,
+      128
+    ],
+    "activation": "leaky_relu",
+    "dropout": 0.05,
+    "batchnorm": false,
+    "residual": true,
+    "head": "dense",
+    "input_dim": 10,
+    "output_dim": 25601
+  },
+  "metrics": {
+    "M_real": {
+      "mse": 0.03330034745142427,
+      "mae": 0.11551055968874255
+    },
+    "M_imag": {
+      "mse": 0.0334399759887938,
+      "mae": 0.11600949478907803
+    },
+    "M": {
+      "mse": 0.03337016172010903,
+      "n_mse": 0.39455368051798145,
+      "r2": 0.6054034679871503,
+      "cos": 0.7794278806855487
+    },
+    "rate": {
+      "mse": 32.41499368049515,
+      "mae": 4.382868196096856,
+      "r2": 0.7748493963108868
+    },
+    "n_samples": 503,
+    "parameters": 3899265,
+    "latency_ms": 13.507983799991052,
+    "epochs_run": 20,
+    "arch": {
+      "hidden_layers": [
+        512,
+        512,
+        256,
+        128
+      ],
+      "activation": "leaky_relu",
+      "dropout": 0.05,
+      "batchnorm": false,
+      "residual": true,
+      "head": "dense",
+      "input_dim": 10,
+      "output_dim": 25601
+    },
+    "arch_name": "h512x512x256x128-leaky_relu-d0.05-nobn-dense",
+    "score": 0.36768345635322597,
+    "train_seconds": 552.252849817276,
+    "tag": "final"
+  },
+  "name": "h512x512x256x128-leaky_relu-d0.05-nobn-dense"
+}

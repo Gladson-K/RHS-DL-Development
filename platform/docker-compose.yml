@@ -1,0 +1,126 @@
+name: rhs-platform
+
+services:
+  redis:
+    image: redis:7-alpine
+    command: ["redis-server", "--appendonly", "yes"]
+    ports:
+      - "${REDIS_PORT:-6380}:6379"
+    volumes:
+      - redis-data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+  mongo:
+    image: mongo:7
+    ports:
+      - "${MONGO_PORT:-27018}:27017"
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+      interval: 10s
+      timeout: 5s
+      retries: 20
+    restart: unless-stopped
+
+  inference:
+    build:
+      context: .
+      dockerfile: containers/inference/Dockerfile
+    environment:
+      REPO_SRC: /repo/src
+      HYBRID_CHECKPOINT: /repo/search_results/mimo64_full_data/checkpoints/hybrid_jev.pt
+      NAS_CHECKPOINT: /repo/checkpoints/mimo64_nas_best.pt
+      SCALER: /repo/data/processed/mimo64_full/scaler.json
+      META: /repo/data/processed/mimo64_full/meta.json
+      FIXTURE: /app/fixtures/static_samples.npz
+      JEV_K: "4"
+      JEV_LATENCY_WEIGHT: "0.05"
+      JEV_SPECTRAL_WEIGHT: "0.2"
+      INFERENCE_STRICT: "0"
+    volumes:
+      - ../src:/repo/src:ro
+      - ../search_results:/repo/search_results:ro
+      - ../checkpoints:/repo/checkpoints:ro
+      - ../data/processed/mimo64_full:/repo/data/processed/mimo64_full:ro
+      - ./fixtures:/app/fixtures:ro
+    ports:
+      - "${INFERENCE_PORT:-8091}:8091"
+    mem_limit: 2560m
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request;urllib.request.urlopen('http://127.0.0.1:8091/healthz',timeout=3)",
+        ]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 30s
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: .
+      dockerfile: containers/backend/Dockerfile
+    environment:
+      MONGO_URI: mongodb://mongo:27017
+      MONGO_DB: rhs_platform
+      REDIS_URL: redis://redis:6379/0
+      INFERENCE_URL: http://inference:8091
+      FIXTURE: /app/fixtures/static_samples.npz
+      ARTIFACT_DIRS: >-
+        /artifacts/search_results:/artifacts/visualizations_review:/artifacts/nas_comparison_results:/artifacts/paper
+      PUBLIC_BASE_URL: http://localhost:${FRONTEND_PORT:-8088}
+    volumes:
+      - ../search_results:/artifacts/search_results:ro
+      - ../visualizations_review:/artifacts/visualizations_review:ro
+      - ../nas_comparison_results:/artifacts/nas_comparison_results:ro
+      - ../paper:/artifacts/paper:ro
+      - ./fixtures:/app/fixtures:ro
+    ports:
+      - "${BACKEND_PORT:-8090}:8090"
+    mem_limit: 512m
+    depends_on:
+      - mongo
+      - redis
+      - inference
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request;urllib.request.urlopen('http://127.0.0.1:8090/healthz',timeout=4)",
+        ]
+      interval: 15s
+      timeout: 6s
+      retries: 20
+      start_period: 20s
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: containers/frontend
+    ports:
+      - "${FRONTEND_PORT:-8088}:80"
+    depends_on:
+      - backend
+    healthcheck:
+      test: ["CMD", "wget", "-q", "-O", "-", "http://127.0.0.1/healthz"]
+      interval: 15s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+    restart: unless-stopped
+
+volumes:
+  mongo-data:
+  redis-data:

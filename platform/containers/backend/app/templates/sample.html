@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Sample {{ report.cid }}</h1>
+<p class="muted">sample_id={{ report.sample_id }} // transport={{ report.transport }} // device={{ report.device_id }}</p>
+
+<p>
+  <a href="/validation/{{ report.cid }}">[ validation ]</a>
+  <a href="/streams/{{ report.cid }}">[ stream ]</a>
+  <a href="/results">[ results ]</a>
+</p>
+
+<div class="cols">
+  <section class="card">
+    <h2>JEV decision</h2>
+    {% if report.decision %}
+    <table>
+      <tr><th>chosen model</th><td>{{ report.decision.chosen_model }}</td></tr>
+      <tr><th>confidence</th><td>{{ "%.4f"|format(report.decision.confidence) }}</td></tr>
+      <tr><th>probe</th><td>{{ report.decision.probe }}</td></tr>
+      <tr><th>scores</th><td>{{ report.decision.scores }}</td></tr>
+    </table>
+    {% else %}
+    <p class="muted">direct publish (no JEV probe)</p>
+    {% endif %}
+  </section>
+
+  <section class="card">
+    <h2>GP vs DL</h2>
+    <table>
+      <tr><th>GP rate (reference)</th><td>{{ "%.4f"|format(report.diff.gp_rate) }}</td></tr>
+      <tr><th>DL rate (prediction)</th><td>{{ "%.4f"|format(report.diff.dl_rate) }}</td></tr>
+      <tr><th>rate delta</th><td>{{ "%.4f"|format(report.diff.rate_delta) }}</td></tr>
+      <tr><th>|rate delta|</th><td>{{ "%.4f"|format(report.diff.rate_abs_delta) }}</td></tr>
+      <tr><th>M cosine</th><td>{{ "%.6f"|format(report.diff.m_cos) }}</td></tr>
+      <tr><th>M nMSE</th><td>{{ "%.6f"|format(report.diff.m_nmse) }}</td></tr>
+    </table>
+  </section>
+</div>
+
+<section class="card">
+  <h2>Provenance</h2>
+  <table>
+    <tr><th>stage</th><th>details</th></tr>
+    {% for hop in [report.source, report.travel, report.destination] %}
+    <tr>
+      <td>{{ hop.stage }}</td>
+      <td><pre>{{ hop }}</pre></td>
+    </tr>
+    {% endfor %}
+  </table>
+</section>
+
+<section class="card">
+  <h2>API</h2>
+  <pre>{{ urls }}</pre>
+</section>
+{% endblock %}
